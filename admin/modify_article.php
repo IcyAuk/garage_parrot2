@@ -20,7 +20,7 @@ if (isset($_GET["id"])) {
 
 <h1 class="py-5">Modifier l'article</h1>
 
-<form method="post" action="update_article.php">
+<form method="post" action="update_article.php" enctype="multipart/form-data">
     <input type="hidden" name="article_id" value="<?= $article["id"] ?>">
 
     <label for="year">Année:</label>
@@ -37,6 +37,11 @@ if (isset($_GET["id"])) {
 
     <label for="description">Description:</label>
     <textarea name="description" required><?= $article["description"] ?></textarea>
+    <br>
+
+    <!-- New input for image upload -->
+    <label for="image">Nouvelle image:</label>
+    <input type="file" name="image">
     <br>
 
     <input type="submit" value="Enregistrer les modifications">
