@@ -44,6 +44,14 @@ adminOnly();
                     </a>
                 </li>
                 <li>
+                    <a href="messages.php" class="nav-link text-white">
+                        <svg class="bi pe-none me-2" width="16" height="16">
+                            <use xlink:href="#table"></use>
+                        </svg>
+                        Messages
+                    </a>
+                </li>
+                <li>
                     <a href="create_article.php" class="nav-link text-white">
                         <svg class="bi pe-none me-2" width="16" height="16">
                             <use xlink:href="#table"></use>

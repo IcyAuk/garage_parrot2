@@ -2,9 +2,9 @@
 
 require __DIR__ . "/template/header.php";
 
-require_once __DIR__ . "/lib/config.php";
-require_once __DIR__ . "/lib/pdo.php";
-require_once __DIR__ . "/lib/comment.php";
+require_once __DIR__ . "/../lib/config.php";
+require_once __DIR__ . "/../lib/pdo.php";
+require_once __DIR__ . "/../lib/comment.php";
 
 if (isset($_GET["page"])) {
     $page = (int)$_GET["page"];
@@ -20,25 +20,32 @@ $totalPages = ceil($totalComments / ADMIN_ITEM_PER_PAGE);
 
 ?>
 
-<div class="container px-5">
-
-<h1 class="py-5">Commentaires</h1>
-<a href="post_comment.php" class="btn btn-primary mb-5">Envoyer un commentaire</a>
+<h1 class="py-5">Messages</h1>
 
 <table class="table">
     <thead>
         <tr>
+            <th scope="col">#</th>
+            <th scope="col">Email</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Téléphone</th>
+            <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($comments as $comment) { ?>
-            <?php if ($comment["validated"] == 1) { ?>
+            <?php if ($comment["validated"] == 2) { ?>
                 <tr>
+                    <th scope="row"><?= $comment["id"]; ?></th>
+                    <td><?= $comment["email"]; ?></td>
                     <td><?= $comment["first_name"]; ?></td>
                     <td><?= $comment["last_name"]; ?></td>
-                    <td><?= substr($comment["text_field"], 0, 500); ?><?= strlen($comment["text_field"]) > 500 ? "..." : ""; ?></td>
+                    <td><?= $comment["phone"]; ?></td>
+                    <td><?= substr($comment["text_field"], 0, 100); ?><?= strlen($comment["text_field"]) > 100 ? "..." : ""; ?></td>
                     <td>
-                        <a href="check_comment.php?id=<?= $comment["id"] ?>">Voir plus</a>
+                        <a href="check_message.php?id=<?= $comment["id"] ?>">Voir plus</a>
+                        <a href="delete_messaget.php?id=<?= $comment["id"] ?>" onclick="return confirm('Delete message ?')">Supprimer</a>
                     </td>
                 </tr>
             <?php } ?>
@@ -55,7 +62,5 @@ $totalPages = ceil($totalComments / ADMIN_ITEM_PER_PAGE);
         </ul>
     </nav>
 <?php } ?>
-
-</div>
 
 <?php require __DIR__ . "/template/footer.php"; ?>
